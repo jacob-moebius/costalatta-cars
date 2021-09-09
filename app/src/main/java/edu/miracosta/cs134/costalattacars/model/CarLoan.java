@@ -8,6 +8,7 @@ package edu.miracosta.cs134.costalattacars.model;
  * @author Michael Paulding
  */
 public class CarLoan {
+
     // Constants
     public static final double OCEANSIDE_TAX_RATE = 0.0775;
     public static final double LOAN_RATE_3_YEARS = 0.0535;
@@ -91,6 +92,14 @@ public class CarLoan {
      */
     public double borrowedAmount() {
         return totalCost() - mDownPayment;
+    }
+
+    /**
+     * Returns sales tax rate
+     * @return Sales tax rate
+     */
+    public static double getOceansideTaxRate() {
+        return OCEANSIDE_TAX_RATE;
     }
 
     /**

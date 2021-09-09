@@ -14,10 +14,7 @@ import edu.miracosta.cs134.costalattacars.model.CarLoan;
 
 public class LoanSummaryActivity extends AppCompatActivity {
 
-    private CarLoan carLoan;
-    private NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.getDefault());
-    private TextView carPriceTextView;
-    private TextView downPaymentEditText;
+    private final NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +31,27 @@ public class LoanSummaryActivity extends AppCompatActivity {
         loanTerm = intent.getIntExtra("LoanTerm", 0);
 
         // Send data to the Model (CarLoan)
-        carLoan = new CarLoan();
+        CarLoan carLoan = new CarLoan();
         carLoan.setPrice(carPrice);
         carLoan.setDownPayment(downPayment);
         carLoan.setLoanTerm(loanTerm);
 
         // Populate TextViews with data from carLoan Model
         // Wire up Views
-        carPriceTextView = findViewById(R.id.carPriceTextView);
-        carPriceTextView.setText(String.valueOf(carLoan.getPrice()));
-        //downPaymentEditText = findViewById(R.id.downPaymentEditText);
-
+        TextView monthlyPaymentTextView = findViewById(R.id.monthlyPaymentTextView);
+        monthlyPaymentTextView.setText(currency.format(carLoan.monthlyPayment()));
+        TextView carPriceTextView = findViewById(R.id.carPriceTextView);
+        carPriceTextView.setText(currency.format(carLoan.getPrice()));
+        TextView salesRateTextView = findViewById(R.id.salesRateTextView);
+        salesRateTextView.setText(String.valueOf(CarLoan.getOceansideTaxRate()));
+        TextView taxAmountTextView = findViewById(R.id.taxAmountTextView);
+        taxAmountTextView.setText(currency.format(carLoan.taxAmount()));
+        TextView borrowedAmountTextView = findViewById(R.id.borrowedAmountTextView);
+        borrowedAmountTextView.setText(currency.format(carLoan.borrowedAmount()));
+        TextView interestAmountTextView = findViewById(R.id.interestAmountTextView);
+        interestAmountTextView.setText(currency.format(carLoan.interestAmount()));
+        TextView totalCostTextView = findViewById(R.id.totalCostTextView);
+        totalCostTextView.setText(currency.format(carLoan.borrowedAmount()));
     }
 
     // onClick returns to main screen
